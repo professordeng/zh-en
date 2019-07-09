@@ -3,11 +3,13 @@
 
 #include <iostream>
 #include <map>
+#include <fstream>
 #include "Word.h"
 
 class Thesaurus{
 private:
 	int words_number;
+	std::string filename;
 	std::map<std::string, Word> c2e;
 	std::map<std::string, Word> e2c;
 	
@@ -19,8 +21,10 @@ public:
 	~Thesaurus();
 };
 
-Thesaurus::Thesaurus() : 
-	words_number(0) {}
+Thesaurus::Thesaurus() 
+	: words_number(0), filename("thesaurus.md") {
+	
+}
 
 bool Thesaurus::add_word(Word word){
 	c2e[word.chinese] = word;
