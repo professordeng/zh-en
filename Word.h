@@ -15,7 +15,8 @@ public:
 	~Word();
 };
 
-Word::Word() {}
+Word::Word() :
+	chinese("null"), english("null"){}
 
 Word::Word(std::string chinese, std::string english) :
 	chinese(chinese), english(english){}

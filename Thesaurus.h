@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+#include <string.h>
 #include "Word.h"
 
 class Thesaurus{
@@ -16,17 +17,25 @@ private:
 public:
 	Thesaurus();
 	bool add_word(Word);       
-	Word get_word(std::string);
+	std::string get_word(std::string);
+	bool delete_word(std::string);
 	void print();
 	~Thesaurus();
 };
 
-Thesaurus::Thesaurus() 
-	: words_number(0), filename("thesaurus.md") {
+Thesaurus::Thesaurus() : words_number(0), filename("thesaurus.md") {
 	char line[101];
 	std::ifstream fin(filename.c_str());
-	while(fin.getline(line, 100))
-		std::cout << line << std::endl;
+	Word word;
+	while(fin.getline(line, 100)){
+		if(line[0] = '-'){
+			strcpy(line, &line[2]);
+			word.chinese = line;
+			fin.getline(line, 100);
+			word.english = line;
+			c2e[word.chinese] = word;
+		}
+	}
 }
 
 bool Thesaurus::add_word(Word word){
@@ -35,8 +44,19 @@ bool Thesaurus::add_word(Word word){
 	return true;
 }
 
-Word Thesaurus::get_word(std::string key){
-	return c2e[key];
+std::string Thesaurus::get_word(std::string key){
+	if (c2e.find(key) != c2e.end())
+		return c2e[key].english;
+	return "null";
+}
+
+bool Thesaurus::delete_word(std::string key){
+	std::map<std::string, Word>::iterator it;
+	if((it = c2e.find(key)) != c2e.end()){
+		c2e.erase(it);
+		return true;
+	}
+	return false;
 }
 
 void Thesaurus::print(){

@@ -2,11 +2,34 @@
 #include "Thesaurus.h"
 
 int main() {
+	std::string question;
 	Thesaurus thesaurus;
-	Word word("开心", "happy"); 
-	thesaurus.add_word(word);
-	word.set_word("垃圾", "trash");
-	thesaurus.add_word(word);
-	thesaurus.print(); 
+	Word word;
+	int choice;
+	while(1){
+		std::cout << "1.查找词汇，2.添加词汇，3.输出词库" << std::endl;
+		std::cout << "you choice : " ;
+		std::cin >> choice;
+		if(choice == 0) break;
+		if(choice == 1){
+			std::cin >> question;
+			std::cout << thesaurus.get_word(question) << std::endl;
+		} 
+		else if(choice == 2){
+			std::cin >> question;
+			word.chinese = question;
+			std::cin >> word.english;
+			thesaurus.add_word(word);
+		}
+		else if(choice == 3){
+			thesaurus.print();
+		}
+		else{
+			std::cout << "输入有误，请重新输入！" << std::endl;
+			// 清除错误标记和缓冲区，避免死循环 
+			std::cin.clear();   
+			std::cin.sync(); 
+		}
+	}
 	return 0;
 }
