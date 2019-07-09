@@ -8,13 +8,12 @@
 #include "Word.h"
 
 class Thesaurus{
-private:
+public:
 	int words_number;
 	std::string filename;
 	std::map<std::string, Word> c2e;
 	std::map<std::string, Word> e2c;
 	
-public:
 	Thesaurus();
 	bool add_word(Word);       
 	std::string get_word(std::string);
