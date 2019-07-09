@@ -2,8 +2,8 @@
 #define Thesaurus_h
 
 #include <iostream>
-#include <map>
 #include <fstream>
+#include <map>
 #include "Word.h"
 
 class Thesaurus{
@@ -23,7 +23,10 @@ public:
 
 Thesaurus::Thesaurus() 
 	: words_number(0), filename("thesaurus.md") {
-	
+	char line[101];
+	std::ifstream fin(filename.c_str());
+	while(fin.getline(line, 100))
+		std::cout << line << std::endl;
 }
 
 bool Thesaurus::add_word(Word word){
@@ -43,7 +46,15 @@ void Thesaurus::print(){
 	}
 }
 
-Thesaurus::~Thesaurus(){}
+Thesaurus::~Thesaurus(){
+	std::ofstream fout(filename.c_str());
+	std::map<std::string, Word>::iterator it;
+	for(it = c2e.begin(); it != c2e.end(); it ++){
+		fout << "- ";
+		fout << it->second.chinese << std::endl;
+		fout << it->second.english << std::endl;
+	}
+}
 
 #endif
 
