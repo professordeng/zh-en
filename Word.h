@@ -1,3 +1,6 @@
+#ifndef Word_h
+#define Word_h
+
 #include <iostream>
 #include <string>
 
@@ -27,3 +30,5 @@ void Word::print(){
 } 
 
 Word::~Word(){}
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef Thesaurus_h
+#define Thesaurus_h
+
 #include <iostream>
 #include <map>
 #include "Word.h"
@@ -37,4 +40,6 @@ void Thesaurus::print(){
 }
 
 Thesaurus::~Thesaurus(){}
+
+#endif
 
